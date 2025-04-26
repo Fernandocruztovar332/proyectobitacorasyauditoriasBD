@@ -1,3 +1,4 @@
+--bdescolv2.sql
 CREATE DATABASE ESCOOL		;
 
 USE ESCOOL
@@ -60,11 +61,11 @@ CREATE TABLE Historial (
 
 
 -- Insertar datos en la tabla Estudiante
-INSERT INTO Estudiante VALUES ('22660256', 'Juan', 'Pérez', 'Gómez', '1', 'Ingenieria en Sistemas');
-INSERT INTO Estudiante VALUES ('22660277', 'María', 'López', 'Hernández', '3', 'Ingenieria Industrial');
-INSERT INTO Estudiante VALUES ('22660137', 'Pedro', 'Martínez', 'Torres', '7', 'Gestion Empresarial');
-INSERT INTO Estudiante VALUES ('22660198', 'Laura', 'González', 'Ramírez', '5', 'Contador Publico');
-INSERT INTO Estudiante VALUES ('22660145', 'Ana', 'Hernández', 'Mora', '1', 'Ingeniería Civil');
+INSERT INTO Estudiante VALUES ('22660256', 'Juan', 'Pï¿½rez', 'Gï¿½mez', '1', 'Ingenieria en Sistemas');
+INSERT INTO Estudiante VALUES ('22660277', 'Marï¿½a', 'Lï¿½pez', 'Hernï¿½ndez', '3', 'Ingenieria Industrial');
+INSERT INTO Estudiante VALUES ('22660137', 'Pedro', 'Martï¿½nez', 'Torres', '7', 'Gestion Empresarial');
+INSERT INTO Estudiante VALUES ('22660198', 'Laura', 'Gonzï¿½lez', 'Ramï¿½rez', '5', 'Contador Publico');
+INSERT INTO Estudiante VALUES ('22660145', 'Ana', 'Hernï¿½ndez', 'Mora', '1', 'Ingenierï¿½a Civil');
 
 -- Insertar datos en la tabla datosPA
 INSERT INTO datosPA VALUES ('O+', '4881234567', 'juan@gmail.com', 'Las Flores', 'Encino', '101', '22660256');
@@ -88,11 +89,11 @@ INSERT INTO cursan VALUES (92, 'Primera', '22660198',4);
 INSERT INTO cursan VALUES (75, 'Primera', '22660145',2);
 
 -- Insertar datos en la tabla Historial
-INSERT INTO Historial VALUES ( '22660256', 'Juan', 'Pérez', 'Gómez', 'Ingeniería en Sistemas', '1', '4', '3', 90, 'Primera');
-INSERT INTO Historial VALUES ( '22660277', 'María', 'López', 'Hernández', 'Ingenieria Industrial', '3', '3', '2', 85, 'Primera');
-INSERT INTO Historial VALUES ( '22660137', 'Pedro', 'Martínez', 'Torres', 'Gestion Empresarial', '2', '4', '2', 88, 'Segunda');
-INSERT INTO Historial VALUES ( '22660198', 'Laura', 'González', 'Ramírez', 'Contador Publico', '4', '2', '2', 92, 'Primera');
-INSERT INTO Historial VALUES ('22660198', 'Ana', 'Hernández', 'Mora', 'Ingeniería Civil', '1', '3', '1', 75, 'Primera');
+INSERT INTO Historial VALUES ( '22660256', 'Juan', 'Pï¿½rez', 'Gï¿½mez', 'Ingenierï¿½a en Sistemas', '1', '4', '3', 90, 'Primera');
+INSERT INTO Historial VALUES ( '22660277', 'Marï¿½a', 'Lï¿½pez', 'Hernï¿½ndez', 'Ingenieria Industrial', '3', '3', '2', 85, 'Primera');
+INSERT INTO Historial VALUES ( '22660137', 'Pedro', 'Martï¿½nez', 'Torres', 'Gestion Empresarial', '2', '4', '2', 88, 'Segunda');
+INSERT INTO Historial VALUES ( '22660198', 'Laura', 'Gonzï¿½lez', 'Ramï¿½rez', 'Contador Publico', '4', '2', '2', 92, 'Primera');
+INSERT INTO Historial VALUES ('22660198', 'Ana', 'Hernï¿½ndez', 'Mora', 'Ingenierï¿½a Civil', '1', '3', '1', 75, 'Primera');
 GO
 CREATE TRIGGER Trigger_VerificarCrearEstudiante
 ON Estudiante
@@ -101,7 +102,7 @@ AS
 BEGIN
     IF EXISTS (SELECT 1 FROM Estudiante WHERE NoControl = (SELECT NoControl FROM inserted))
     BEGIN
-        PRINT 'El estudiante ya existe. Operación cancelada.';
+        PRINT 'El estudiante ya existe. Operaciï¿½n cancelada.';
     END
     ELSE
     BEGIN
@@ -146,7 +147,7 @@ BEGIN
     -- Aseguramos que solo se ejecuta si hay datos nuevos en la tabla 'inserted'
     INSERT INTO cursan(NoControl, calif, oportunidad, idmateria)
     SELECT NoControl, 0, 'Primera', NULL
-    FROM inserted; -- inserted contiene los datos del registro recién insertado
+    FROM inserted; -- inserted contiene los datos del registro reciï¿½n insertado
 END;
 GO
 
@@ -188,7 +189,7 @@ BEGIN
     END
     ELSE
     BEGIN
-        PRINT 'No se encontró ninguna materia predeterminada.';
+        PRINT 'No se encontrï¿½ ninguna materia predeterminada.';
     END
 END;
 GO
@@ -199,10 +200,10 @@ ON Estudiante
 AFTER UPDATE
 AS
 BEGIN
-    -- Actualiza la información en la tabla 'cursan' basada en el NoControl
+    -- Actualiza la informaciï¿½n en la tabla 'cursan' basada en el NoControl
     UPDATE c
     SET 
-        c.calif = c.calif,  -- Puedes agregar más lógica si es necesario
+        c.calif = c.calif,  -- Puedes agregar mï¿½s lï¿½gica si es necesario
         c.oportunidad = c.oportunidad
     FROM cursan c
     INNER JOIN inserted i ON c.NoControl = i.NoControl;
@@ -264,16 +265,16 @@ BEGIN
         DELETE FROM cursan
         WHERE NoControl IN (SELECT NoControl FROM deleted);
 
-        -- Confirmar la transacción
+        -- Confirmar la transacciï¿½n
         COMMIT TRANSACTION;
 
         PRINT 'Datos eliminados correctamente e insertados en Historial.';
     END TRY
     BEGIN CATCH
-        -- Revertir la transacción en caso de error
+        -- Revertir la transacciï¿½n en caso de error
         ROLLBACK TRANSACTION;
 
-        -- Lanzar el error para depuración
+        -- Lanzar el error para depuraciï¿½n
         THROW;
     END CATCH
 END;
@@ -347,7 +348,7 @@ CREATE PROCEDURE sp_ActualizarEstudiante
 AS
 BEGIN
     BEGIN TRY
-        -- Actualizar información del estudiante
+        -- Actualizar informaciï¿½n del estudiante
         UPDATE Estudiante
         SET nombre = @nombre,
             apP = @apP,
@@ -430,13 +431,13 @@ CREATE or alter PROCEDURE sp_InsertarEstudiante
     @apM VARCHAR(50),
     @semestre VARCHAR(8),
     @carrera VARCHAR(80),
-    @calif INT,                  -- Nueva entrada: calificación
+    @calif INT,                  -- Nueva entrada: calificaciï¿½n
     @oportunidad VARCHAR(20),  -- Nueva entrada: oportunidad (por ejemplo, "Primera", "Segunda")
     @idmateria INT          -- Nueva entrada: id de la materia
 AS
 BEGIN
     BEGIN TRY
-        -- Inicia una transacción para asegurar consistencia
+        -- Inicia una transacciï¿½n para asegurar consistencia
         BEGIN TRANSACTION;
 
         -- Insertar el estudiante en la tabla Estudiante
@@ -447,11 +448,11 @@ BEGIN
         INSERT INTO cursan (calif, oportunidad, NoControl, idmateria)
         VALUES (@calif, @oportunidad, @NoControl,@idmateria);
 
-        -- Confirma la transacción si ambas operaciones son exitosas
+        -- Confirma la transacciï¿½n si ambas operaciones son exitosas
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
-        -- En caso de error, deshacer la transacción
+        -- En caso de error, deshacer la transacciï¿½n
         ROLLBACK TRANSACTION;
 
         -- Lanzar el error para manejo externo
