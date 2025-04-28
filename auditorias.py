@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import pyodbc
+from tkinter import ttk
 
 # Conexión a la base de datos
 def conectar_bd():
@@ -13,6 +14,30 @@ def conectar_bd():
         messagebox.showerror("Error", f"No se pudo conectar a la base de datos: {e}")
         return None
 
+
+def cargar_numeros_control():
+    try:
+        conexion = conectar_bd()
+        cursor = conexion.cursor()
+
+        # Ejecutar el stored procedure
+        cursor.execute("EXEC sp_ListarNoControl")
+        numeros_control = [row[0] for row in cursor.fetchall()]
+
+        combo_no_control['values'] = numeros_control
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudieron cargar los números de control: {e}")
+    finally:
+        if conexion:
+            conexion.close()
+
+def seleccionar_no_control():
+    # Obtener el valor seleccionado del ComboBox
+    seleccionado = combo_no_control.get()
+
+    # Insertarlo en el entry_no_control
+    entry_no_control.delete(0, tk.END)
+    entry_no_control.insert(0, seleccionado)
 
 
 def insertar_estudiante():
@@ -97,10 +122,8 @@ def registrar_calificacion():
     try:
         conexion = conectar_bd()
         cursor = conexion.cursor()
-        cursor.execute("""
-            INSERT INTO cursan (calif, oportunidad, NoControl, idmateria)
-            VALUES (?, ?, ?, ?)
-        """, (entry_calif.get(), entry_oportunidad.get(), entry_no_control.get(), entry_id_materia.get()))
+        cursor.execute("""EXEC sp_RegistrarCalificacion ?, ?, ?, ?
+        """, (int(entry_calif.get()), entry_oportunidad.get(), entry_no_control.get(), int(entry_id_materia.get())))
         conexion.commit()
         messagebox.showinfo("Éxito", "Calificación registrada correctamente.")
         limpiar_campos()
@@ -266,6 +289,19 @@ label_id_materia.grid(row=8, column=0, padx=10, pady=5, sticky="w")
 entry_id_materia = tk.Entry(root)
 entry_id_materia.grid(row=8, column=1, padx=10, pady=5)
 
+# Combobox para números de control
+label_combo_nc = tk.Label(root, text="Selecciona No. Control:")
+label_combo_nc.grid(row=10, column=0, padx=10, pady=5, sticky="w")
+
+combo_no_control = ttk.Combobox(root, state="readonly")
+combo_no_control.grid(row=10, column=1, padx=10, pady=5)
+
+combo_no_control.bind("<<ComboboxSelected>>", lambda event: seleccionar_no_control())
+
+# Botón para cargar los NoControl en el Combobox
+btn_cargar_nc = tk.Button(root, text="Cargar NoControl", command=cargar_numeros_control)
+btn_cargar_nc.place(x=350, y=240, width=250)
+
 # Botones
 btn_crear = tk.Button(root, text="insertar", command=insertar_estudiante)
 btn_crear.place(x=350, y=30, width=250)
@@ -285,24 +321,24 @@ btn_limpiar.place(x=350, y=150, width=250)
 
     # Configuración de las etiquetas y Listbox para mostrar la tabla
 label_tablaC1 = tk.Label(root, text="idM", bg="light blue")
-label_tablaC1.place(x=100, y=300, width=250)
+label_tablaC1.place(x=100, y=350, width=250)
 cuadro_campo1 = tk.Listbox(root)
-cuadro_campo1.place(x=100, y=320, width=250, height=200)
+cuadro_campo1.place(x=100, y=370, width=250, height=200)
 
 label_tablaC2 = tk.Label(root, text="Materia", bg="light blue")
-label_tablaC2.place(x=350, y=300, width=250)
+label_tablaC2.place(x=350, y=350, width=250)
 cuadro_campo2 = tk.Listbox(root)
-cuadro_campo2.place(x=350, y=320, width=250, height=200)
+cuadro_campo2.place(x=350, y=370, width=250, height=200)
 
 label_tablaC3 = tk.Label(root, text="Oportunidad", bg="light blue")
-label_tablaC3.place(x=550, y=300, width=360)
+label_tablaC3.place(x=550, y=350, width=360)
 cuadro_campo3 = tk.Listbox(root)
-cuadro_campo3.place(x=550, y=320, width=360, height=200)
+cuadro_campo3.place(x=550, y=370, width=360, height=200)
 
 label_tablaC4 = tk.Label(root, text="calificacion", bg="light blue")
-label_tablaC4.place(x=850, y=300, width=360)
+label_tablaC4.place(x=850, y=350, width=360)
 cuadro_campo4 = tk.Listbox(root)
-cuadro_campo4.place(x=850, y=320, width=360, height=200)
+cuadro_campo4.place(x=850, y=370, width=360, height=200)
 
 btn_listar_materias = tk.Button(root, text="Listar Materias", command=listar_materias_estudiante)
 btn_listar_materias.place(x=350, y=210, width=250)
