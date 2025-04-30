@@ -75,3 +75,39 @@ BEGIN
         THROW;
     END CATCH
 END
+
+
+use ESCOOL
+
+
+CREATE OR ALTER PROCEDURE sp_ConsultarHistorial
+AS
+BEGIN
+    SELECT 
+        NoControl, 
+        nombre, 
+        apP, 
+        apM, 
+        carrera, 
+        semestre, 
+        horasP, 
+        horasT, 
+        calif, 
+        oportunidad
+    FROM Historial
+    ORDER BY idHistorial DESC;
+END;
+
+
+CREATE OR ALTER PROCEDURE sp_ConsultarAuditoriaGeneral
+AS
+BEGIN
+    SELECT 
+        fecha, 
+        nombre_tabla, 
+        tipo_accion, 
+        usuario, 
+        detalle
+    FROM AuditoriaGeneral
+    ORDER BY fecha DESC;
+END;

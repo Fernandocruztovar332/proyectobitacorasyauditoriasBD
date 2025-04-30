@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 import pyodbc
+import menuprincipal as mp
 
 def abrir_ventana_admin(conexion):
     root = tk.Tk()
@@ -35,7 +36,7 @@ def abrir_ventana_admin(conexion):
     def cargar_auditoria():
         try:
             cursor = conexion.cursor()
-            cursor.execute("SELECT fecha, nombre_tabla, tipo_accion, usuario, detalle FROM AuditoriaGeneral ORDER BY fecha DESC")
+            cursor.execute("EXEC sp_ConsultarAuditoriaGeneral")
             resultados = cursor.fetchall()
 
             cuadro_fecha.delete(0, tk.END)
@@ -56,5 +57,6 @@ def abrir_ventana_admin(conexion):
 
     # Botón para cargar auditoría
     tk.Button(root, text="Cargar Auditoría", command=cargar_auditoria, bg="light blue").place(x=500, y=20, width=200, height=40)
+    tk.Button(root, text="<--", command=mp.cargarmenu_adm, bg="light blue").place(x=20, y=20, width=200, height=40)
 
     root.mainloop()
