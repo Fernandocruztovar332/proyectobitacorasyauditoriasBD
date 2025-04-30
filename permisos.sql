@@ -13,6 +13,16 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON materia TO usuario_normal;
 GRANT SELECT, INSERT, UPDATE, DELETE ON cursan TO usuario_normal;
 GRANT SELECT, INSERT, UPDATE, DELETE ON datosPA TO usuario_normal;
 
+GRANT EXECUTE ON dbo.sp_ListarNoControl TO usuario_normal;
+GRANT EXECUTE ON dbo.sp_InsertarEstudiante TO usuario_normal;
+GRANT EXECUTE ON dbo.sp_ActualizarEstudiante TO usuario_normal;
+GRANT EXECUTE ON dbo.sp_RegistrarCalificacion TO usuario_normal;
+GRANT EXECUTE ON dbo.sp_EliminarEstudiante TO usuario_normal;
+GRANT EXECUTE ON dbo.sp_ListarMateriasEstudiantes TO usuario_normal;
+
+GRANT SELECT ON dbo.vw_EstudianteCompleto TO usuario_normal;
+
+
 -- (NO DAR ACCESO a AuditoriaGeneral, Historial, etc.)
 
 
