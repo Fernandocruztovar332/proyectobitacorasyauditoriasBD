@@ -6,8 +6,12 @@ import menuprincipal as mp
 def historial(con):
     root = tk.Tk()
     root.title("Panel Historial")
-    root.geometry("1200x600")
+    root.geometry("1100x520")
     root.configure(bg="#1F618D")
+
+    def regresar():
+        root.destroy()
+        mp.cargarmenu_adm(con)
 
     # Listboxes para mostrar los campos
     campos = {
@@ -25,9 +29,9 @@ def historial(con):
 
     # Posiciones iniciales
     x_inicial = 10
-    ancho = 130
+    ancho = 100
     alto = 400
-    espacio = 10
+    espacio = 5
 
     # Crear etiquetas y listboxes dinámicamente
     for idx, (nombre, cuadro) in enumerate(campos.items()):
@@ -57,6 +61,6 @@ def historial(con):
             messagebox.showerror("Error", f"No se pudo cargar el historial:\n{e}")
 
     # Botón para cargar datos
-    tk.Button(root, text="Cargar Historial", command=cargar_historial, bg="light blue").place(x=600, y=10, width=200, height=40)
-    tk.Button(root, text="<--", command=mp.cargarmenu_adm, bg="light blue").place(x=20, y=10, width=200, height=40)
+    tk.Button(root, text="Cargar Historial", command=cargar_historial, bg="light blue").place(x=850, y=10, width=200, height=40)
+    tk.Button(root, text="<--", command=regresar, bg="light blue").place(x=20, y=10, width=200, height=40)
     root.mainloop()
