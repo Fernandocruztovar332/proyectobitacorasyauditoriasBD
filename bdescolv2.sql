@@ -61,11 +61,11 @@ CREATE TABLE Historial (
 
 
 -- Insertar datos en la tabla Estudiante
-INSERT INTO Estudiante VALUES ('22660256', 'Juan', 'P�rez', 'G�mez', '1', 'Ingenieria en Sistemas');
-INSERT INTO Estudiante VALUES ('22660277', 'Mar�a', 'L�pez', 'Hern�ndez', '3', 'Ingenieria Industrial');
-INSERT INTO Estudiante VALUES ('22660137', 'Pedro', 'Mart�nez', 'Torres', '7', 'Gestion Empresarial');
-INSERT INTO Estudiante VALUES ('22660198', 'Laura', 'Gonz�lez', 'Ram�rez', '5', 'Contador Publico');
-INSERT INTO Estudiante VALUES ('22660145', 'Ana', 'Hern�ndez', 'Mora', '1', 'Ingenier�a Civil');
+INSERT INTO Estudiante VALUES ('22660256', 'Juan', 'Perez', 'Gomez', '1', 'Ingenieria en Sistemas');
+INSERT INTO Estudiante VALUES ('22660277', 'Marta', 'Lopez', 'Hernendez', '3', 'Ingenieria Industrial');
+INSERT INTO Estudiante VALUES ('22660137', 'Pedro', 'Martinez', 'Torres', '7', 'Gestion Empresarial');
+INSERT INTO Estudiante VALUES ('22660198', 'Laura', 'Gonzalez', 'Ramirez', '5', 'Contador Publico');
+INSERT INTO Estudiante VALUES ('22660145', 'Ana', 'Hernendez', 'Mora', '1', 'Ingenieria Civil');
 
 -- Insertar datos en la tabla datosPA
 INSERT INTO datosPA VALUES ('O+', '4881234567', 'juan@gmail.com', 'Las Flores', 'Encino', '101', '22660256');
@@ -89,11 +89,11 @@ INSERT INTO cursan VALUES (92, 'Primera', '22660198',4);
 INSERT INTO cursan VALUES (75, 'Primera', '22660145',2);
 
 -- Insertar datos en la tabla Historial
-INSERT INTO Historial VALUES ( '22660256', 'Juan', 'P�rez', 'G�mez', 'Ingenier�a en Sistemas', '1', '4', '3', 90, 'Primera');
-INSERT INTO Historial VALUES ( '22660277', 'Mar�a', 'L�pez', 'Hern�ndez', 'Ingenieria Industrial', '3', '3', '2', 85, 'Primera');
-INSERT INTO Historial VALUES ( '22660137', 'Pedro', 'Mart�nez', 'Torres', 'Gestion Empresarial', '2', '4', '2', 88, 'Segunda');
-INSERT INTO Historial VALUES ( '22660198', 'Laura', 'Gonz�lez', 'Ram�rez', 'Contador Publico', '4', '2', '2', 92, 'Primera');
-INSERT INTO Historial VALUES ('22660198', 'Ana', 'Hern�ndez', 'Mora', 'Ingenier�a Civil', '1', '3', '1', 75, 'Primera');
+INSERT INTO Historial VALUES ( '22660256', 'Juan', 'Perez', 'Gomez', 'Ingenieria en Sistemas', '1', '4', '3', 90, 'Primera');
+INSERT INTO Historial VALUES ( '22660277', 'Marta', 'Lopez', 'Hernandez', 'Ingenieria Industrial', '3', '3', '2', 85, 'Primera');
+INSERT INTO Historial VALUES ( '22660137', 'Pedro', 'Martinez', 'Torres', 'Gestion Empresarial', '2', '4', '2', 88, 'Segunda');
+INSERT INTO Historial VALUES ( '22660198', 'Laura', 'Gonzalez', 'Ramirez', 'Contador Publico', '4', '2', '2', 92, 'Primera');
+INSERT INTO Historial VALUES ('22660198', 'Ana', 'Hernandez', 'Mora', 'Ingenieria Civil', '1', '3', '1', 75, 'Primera');
 GO
 CREATE TRIGGER Trigger_VerificarCrearEstudiante
 ON Estudiante
