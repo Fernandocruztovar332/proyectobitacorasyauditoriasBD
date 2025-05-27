@@ -4,6 +4,7 @@ import auditoria_admin as adm
 import consultas as cons
 import historial as hist
 import login_auditoria as log
+import backup_interface as res
 from tkinter import  messagebox
 def cargarmenu_adm(con):
     root = tk.Tk()
@@ -27,6 +28,10 @@ def cargarmenu_adm(con):
         root.destroy()
         hist.historial(con)
 
+    def ir_a_respaldo():
+        root.destroy()
+        res.backup_interface(con)
+
     def salir_aplicacion():
         respuesta = messagebox.askyesno("Salir", "¿Estás seguro de que deseas salir?")
         if respuesta:
@@ -48,8 +53,14 @@ def cargarmenu_adm(con):
     btn_historial = tk.Button(menu_frame, text="Historial", command=ir_a_historial, bg="light blue")
     btn_historial.place(x=50, y=140, width=400, height=40)
 
+    btn_respaldo = tk.Button(menu_frame, text="backups", command=ir_a_respaldo, bg="light blue")
+    btn_respaldo.place(x=50, y=200, width=400, height=40)
+
+    btn_restore = tk.Button(menu_frame, text="restores", command=salir_aplicacion, bg="light blue")
+    btn_restore.place(x=50, y=320, width=400, height=40)
+
     btn_salir = tk.Button(menu_frame, text="Salir", command=salir_aplicacion, bg="light blue")
-    btn_salir.place(x=50, y=200, width=400, height=40)
+    btn_salir.place(x=50, y=380, width=400, height=40)
 
     tk.Button(menu_frame, text="<--", command=regresar, bg="light blue").place(x=50, y=260, width=400, height=40)
 
