@@ -9,7 +9,7 @@ import login_auditoria as log
 
 def conectar_bd():
     try:
-        conexion = pyodbc.connect('DRIVER={SQL Server};SERVER=localhost\\SQLEXPRESS;DATABASE=ESCOOL;Trusted_Connection=yes;')
+        conexion = pyodbc.connect('DRIVER={SQL Server};SERVER=localhost\\SQLEXPRESS;DATABASE=ESCOOL;Trusted_Connection=yes;', autocommit=True)
         return conexion
     except Exception as e:
         messagebox.showerror("Error", f"No se pudo conectar a la base de datos: {e}")

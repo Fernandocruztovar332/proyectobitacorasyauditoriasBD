@@ -15,7 +15,8 @@ def cargarlogin():
                 f"SERVER={servidor};"
                 f"DATABASE={base_datos};"
                 f"UID={usuario};"
-                f"PWD={contrasena}"
+                f"PWD={contrasena}",
+                autocommit=True
             )
             return conexion
         except pyodbc.Error:
