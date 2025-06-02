@@ -1,11 +1,16 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
+import menuprincipal as mp
 
 def backup_interface(con):
     root = tk.Tk()
     root.title("Respaldo de Base de Datos")
     root.geometry("400x250")
     root.configure(bg="#1F618D")
+
+    def regresar():
+        root.destroy()
+        mp.cargarmenu_adm(con)
 
     def hacer_respaldo(tipo):
         ruta = filedialog.asksaveasfilename(
@@ -32,5 +37,6 @@ def backup_interface(con):
     tk.Button(root, text="Respaldo Completo", command=lambda: hacer_respaldo("full"), width=25).pack(pady=10)
     tk.Button(root, text="Respaldo Parcial", command=lambda: hacer_respaldo("partial"), width=25).pack(pady=10)
     tk.Button(root, text="Salir", command=root.destroy, width=25, bg="lightgray").pack(pady=20)
+    tk.Button(root, text="<--", command=regresar, bg="light blue").pack(pady=10)
 
     root.mainloop()
