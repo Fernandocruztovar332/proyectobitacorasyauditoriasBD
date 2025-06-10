@@ -19,9 +19,6 @@ def cargarmenu_adm(con):
         root.destroy()
         adm.abrir_ventana_admin(con)
 
-    def ir_a_consultas():
-        root.destroy()
-        cons.paneladmn(con)
 
     def ir_a_historial():
         root.destroy()
@@ -39,11 +36,10 @@ def cargarmenu_adm(con):
     menu_frame.place(x=0, y=0, width=500, height=600)  # <-- Asegura visibilidad
 
     # Botones dentro del marco
-    btn_auditoria = tk.Button(menu_frame, text="Auditoría", command=ir_a_auditoria, bg="light blue")
+    btn_auditoria = tk.Button(menu_frame, text="Bitacora", command=ir_a_auditoria, bg="light blue")
     btn_auditoria.place(x=50, y=20, width=400, height=40)
 
-    btn_consultas = tk.Button(menu_frame, text="Consultas", command=ir_a_consultas, bg="light blue")
-    btn_consultas.place(x=50, y=80, width=400, height=40)
+
 
     btn_historial = tk.Button(menu_frame, text="Historial", command=ir_a_historial, bg="light blue")
     btn_historial.place(x=50, y=140, width=400, height=40)

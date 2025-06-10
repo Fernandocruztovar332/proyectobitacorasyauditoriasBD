@@ -1,6 +1,7 @@
 import auditorias as sc
 #import auditoria_admin as adm
 import menuprincipal as mp
+import menuUsiarioadmin as mua
 
 import tkinter as tk
 from tkinter import messagebox
@@ -33,7 +34,7 @@ def cargarlogin():
             if conexion:
                 messagebox.showinfo("Inicio de sesión", f"Bienvenido, {usuario}")
                 ventana.destroy()
-                mp.cargarmenu_adm(conexion)
+                mua.panel_admin(conexion, usuario)
             else:
                 messagebox.showerror("Error", "Credenciales incorrectas o conexión fallida.")
         elif usuario == "usuario_normal":
@@ -43,6 +44,14 @@ def cargarlogin():
                 sc.iniciar_school(conexion)
             else:
                 messagebox.showerror("Error", "Credenciales incorrectas o conexión fallida.")
+
+        elif usuario == "auditor_user":
+            if conexion:
+                messagebox.showinfo("Inicio de sesión", f"Bienvenido, {usuario}")
+                ventana.destroy()
+                mp.cargarmenu_adm(conexion)
+            else:
+                messagebox.showerror("Error", "Credenciales incorrectas o conexión fallida.")
         else:
             messagebox.showerror("Error", "Usuario no autorizado.")
 
@@ -50,6 +59,7 @@ def cargarlogin():
     ventana = tk.Tk()
     ventana.title("Login Proyecto Auditorías")
     ventana.geometry("300x200")
+    ventana.configure(bg="#002843")
 
     tk.Label(ventana, text="Usuario:").pack(pady=5)
     entry_usuario = tk.Entry(ventana)
