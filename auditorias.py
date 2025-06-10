@@ -3,7 +3,10 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import pyodbc
-from tkinter import ttk    
+from tkinter import ttk
+
+import login_auditoria as log
+
 def conectar_bd():
     try:
         conexion = pyodbc.connect('DRIVER={SQL Server};SERVER=localhost\\SQLEXPRESS;DATABASE=ESCOOL;Trusted_Connection=yes;')
@@ -19,6 +22,10 @@ def iniciar_school(conexion):
     root.title("Interfaz SCHOOL")
     root.geometry("1300x1000")
     # Conexión a la base de datos
+
+    def regresar():
+        root.destroy()
+        log.cargarlogin()
 
 
 
@@ -352,6 +359,8 @@ def iniciar_school(conexion):
 
     btn_salir = tk.Button(root, text="Salir", command=salir_aplicacion)
     btn_salir.place(x=350, y=180, width=250)
+
+    tk.Button(root, text="<--", command=regresar, bg="light blue").place(x=1100, y=0, width=200, height=40)
 
     # Iniciar la aplicación
     root.mainloop()

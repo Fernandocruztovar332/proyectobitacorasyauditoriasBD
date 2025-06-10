@@ -10,6 +10,10 @@ def abrir_ventana_admin(conexion):
     root.geometry("1200x600")
     root.configure(bg="#1F618D")
 
+    def regresar():
+        root.destroy()
+        mp.cargarmenu_adm(conexion)
+
     # Listbox para mostrar auditorías
     cuadro_fecha = tk.Listbox(root)
     cuadro_fecha.place(x=50, y=100, width=200, height=400)
@@ -57,6 +61,6 @@ def abrir_ventana_admin(conexion):
 
     # Botón para cargar auditoría
     tk.Button(root, text="Cargar Auditoría", command=cargar_auditoria, bg="light blue").place(x=500, y=20, width=200, height=40)
-    tk.Button(root, text="<--", command=mp.cargarmenu_adm, bg="light blue").place(x=20, y=20, width=200, height=40)
+    tk.Button(root, text="<--", command=regresar, bg="light blue").place(x=20, y=20, width=200, height=40)
 
     root.mainloop()

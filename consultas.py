@@ -8,6 +8,10 @@ def paneladmn(con):
     admin_ventana.geometry("800x600")
     admin_ventana.configure(bg="#1F618D")
 
+    def regresar():
+        admin_ventana.destroy()
+        mp.cargarmenu_adm(con)
+
     # Label y Entry para escribir la consulta
     tk.Label(admin_ventana, text="Consulta SQL:", bg="#1F618D", fg="white", font=("Arial", 12)).pack(pady=10)
     entrada_consulta = tk.Entry(admin_ventana, width=100, font=("Arial", 12))
@@ -49,4 +53,4 @@ def paneladmn(con):
 
     # Botón para ejecutar la consulta
     tk.Button(admin_ventana, text="Ejecutar Consulta", command=ejecutar_consulta, bg="light green").pack(pady=5)
-    tk.Button(admin_ventana, text="<--", command=mp.cargarmenu_adm, bg="light blue").place(x=20, y=0, width=200, height=40)
+    tk.Button(admin_ventana, text="<--", command=regresar, bg="light blue").place(x=20, y=0, width=200, height=40)
